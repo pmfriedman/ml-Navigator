@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html class="full-height">
+<head>
+    <title>ML Navigator</title>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="lib/codeMirror/codemirror.css" >
+    <link rel="stylesheet" type="text/css" href="lib/codeMirror/the-matrix.css" >
+    <link rel="stylesheet" type="text/css" href="Content/styles.css">
+</head>
+<body class="red container">
+    <div class="row main-row">
+        <div id="divExplorer" class="explorer hidden yellow col-md-4" data-bind="css: { hidden: false }">
+            <h3>Databases</h3>
+            <div>
+                <select data-bind="options: databases,
+                               optionsText: 'name',
+                               value: selectedDatabase,
+                               optionsCaption: 'Choose...'"></select>
+            </div>
+
+            <h3>Breadcrumbs</h3>
+            <div data-bind="foreach: currentPathParts">
+                <span>
+                    <a href="#" data-bind="hashLink: path"><span data-bind="text: lastPartDisplay"></span></a>
+                </span>
+            </div>
+
+            <h3>Contents</h3>
+            <div data-bind="foreach: currentPathContents">
+                <div>
+                    <a href="#" data-bind="hashLink: path"><span data-bind="text: lastPartDisplay"></span></a>
+                </div>
+            </div>
+        </div>
+        <div id="divEditor" class="editor hidden blue col-md-8" data-bind="css: { hidden: false }">
+
+            <div class="full-height">
+                <text></text>
+                <textarea data-bind="codeMirror: documentContent"></textarea>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.0.3.min.js"></script>
+    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/knockout/3.1.0/knockout-min.js"></script>
+    <script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>
+    <script type="text/javascript" src="lib/vkbeautify/vkbeautify.0.99.00.beta.js"></script>
+    <script src="lib/codeMirror/codemirror-compressed.js"></script>
+    <script src="lib/sammy/sammy.min.js"></script>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+
+    <script src="KnockoutExtensions/CodeMirror.js"></script>
+
+    <script src="MarkLogic/DirectoryService.js"></script>
+    <script src="MarkLogic/DatabaseService.js"></script>
+
+    <script src="ViewModels/ExplorerViewModel.js"></script>
+    <script src="ViewModels/EditorViewModel.js"></script>
+
+    <script src="Models/DatabaseInfo.js"></script>
+    <script src="Models/PathInfo.js"></script>
+
+    <script src="Default.js" ></script>
+    <script src="Container.js"></script>
+    <script src="Server.js"></script>
+    <script src="Router.js"></script>
+</body>
+</html>
