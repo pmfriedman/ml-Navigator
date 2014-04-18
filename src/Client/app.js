@@ -1,0 +1,1 @@
+Navigator.NavigatorModule.Configure();

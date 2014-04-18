@@ -1,8 +1,11 @@
 /// <reference path="../references.ts" />
-var Models;
-(function (Models) {
+var Navigator;
+(function (Navigator) {
     var PathInfo = (function () {
         function PathInfo(path) {
+            // strip off leading slash
+            if (path.indexOf("/") === 0)
+                path = path.substr(1);
             this.path = path;
             this.databaseName = "";
             this.pathInDatabase = "";
@@ -56,6 +59,6 @@ var Models;
         };
         return PathInfo;
     })();
-    Models.PathInfo = PathInfo;
-})(Models || (Models = {}));
+    Navigator.PathInfo = PathInfo;
+})(Navigator || (Navigator = {}));
 //# sourceMappingURL=PathInfo.js.map
