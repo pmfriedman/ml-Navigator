@@ -2,19 +2,32 @@ var Navigator;
 
 (function (Navigator) {
 	var ExplorerController = (function () {
-		function ExplorerController($scope, $rootScope, explorerService, $http, $location, $log) {
+		function ExplorerController($scope, $rootScope, explorerService, $http, $location, $log, $routeParams, urlPrefix) {
 			_this = this;
 			$scope.databases = [];
 			$scope.currentPathParts = []
 			$scope.currentPathContents = [];
 			$scope.selectedDatabase = null;
+			$scope.pathInDb = $routeParams.pathInDb || "";
 			this.$http = $http;
 			this.explorerService = explorerService;
+
+			$scope.urlPrefix = urlPrefix.navigator;
+
+
+			$log.debug("path in db: " + $routeParams.pathInDb);
 
 			$scope.populateDatabases = function () {	
 				
 				var promise = _this.explorerService.getAllDatabases(_this.$http).then(function(data) { 
-						$scope.databases = data;
+						$scope.databases = data; // database
+
+                		var pathInfo = new Navigator.PathInfo($scope.pathInDb);
+		                var databaseName = pathInfo.databaseName;
+		                var databaseInfo = $.grep($scope.databases, function (db) {
+		                    return db.databaseName === databaseName;
+		                })[0];
+		                $scope.selectedDatabase = databaseInfo;
 					});
 
 				return promise;
@@ -26,7 +39,7 @@ var Navigator;
 		            pathInfo = Navigator.PathInfo.FromParts($scope.selectedDatabase.databaseName, "");
 		        var newPath = pathInfo.databaseName;
 
-		        $location.path(newPath);
+		        $location.path("navigator/" + newPath);
 			};
 
 			// React to external changes
@@ -34,13 +47,6 @@ var Navigator;
                 $log.debug("updating viewdata from path.  currentPath=" + path);
 
                 var pathInfo = new Navigator.PathInfo(path);
-
-                // database
-                var databaseName = pathInfo.databaseName;
-                var databaseInfo = $.grep($scope.databases, function (db) {
-                    return db.databaseName === databaseName;
-                })[0];
-                $scope.selectedDatabase = databaseInfo;
 
                 // directory contents
                 if (pathInfo.pathType !== 2 /* Document */) {
@@ -52,17 +58,8 @@ var Navigator;
                 }
             };
 
-		    $scope.populateDatabases()
-		    	.then(function() { 
-					$rootScope.$watch(
-						function() {
-							return $location.path();
-						}, 
-						function() {
-							$scope.updateViewDataFromPath($location.path());
-						}
-					);
-		    	} );
+		    $scope.populateDatabases();
+		    $scope.updateViewDataFromPath($scope.pathInDb);
 
 		}
 		ExplorerController.Name = "ExplorerController";

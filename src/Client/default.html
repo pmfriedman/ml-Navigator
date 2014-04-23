@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="full-height" data-ng-app="Navigator">
+<html class="full-height" data-ng-app="app">
 <head>
     <title>ML Navigator</title>
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
@@ -9,37 +9,11 @@
 </head>
 <body class="container">
 
-    <div class="row main-row">
-        <div id="divExplorer" class="explorer col-md-4" data-ng-controller='ExplorerController'>
-            <h3>Databases</h3>
-            <div>
-                <select data-ng-model="selectedDatabase" data-ng-options='db.databaseName for db in databases' data-ng-change='onDatabaseSelected()'></select>
-            </div>
-
-            <h3>Breadcrumbs</h3>
-            <div data-ng-repeat="pathInfo in currentPathParts">
-                <span>
-                    <a data-ng-href="#{{pathInfo.path}}" ><span>{{pathInfo.lastPartDisplay}}</span></a>
-                </span>
-            </div>
-
-            <h3>Contents</h3>
-            <div>
-                <div data-ng-repeat="pathInfo in currentPathContents">
-                    <a data-ng-href="#{{pathInfo.path}}"><span>{{pathInfo.lastPartDisplay}}</span></a>
-                </div>
-            </div>
-        </div>
-        <div id="divEditor" class="editor col-md-8" data-ng-controller='EditorController'>
-
-            <div class="full-height">
-                <textarea ui-codemirror="{onLoad:codeMirrorLoaded}" data-ng-model="documentContent"></textarea>
-            </div>
-        </div>
-    </div>
+    <div ng-view></div>
 
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.0.3.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular-route.js"></script>
     <script type="text/javascript" src="lib/vkbeautify/vkbeautify.0.99.00.beta.js"></script>
     <script src="lib/codeMirror/codemirror-compressed.js"></script>
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
@@ -47,15 +21,15 @@
 
     <script type="text/javascript" src="AngularExtensions/Config.js"></script>
 
-    <script src="Modules/Navigator/PathInfo.js"></script>
-
-
+    <script type="text/javascript" src="Modules/Navigator/PathInfo.js"></script>
     <script type="text/javascript" src="Modules/Navigator/ExplorerService.js"></script>
     <script type="text/javascript" src="Modules/Navigator/explorerController.js"></script>
     <script type="text/javascript" src="Modules/Navigator/EditorController.js"></script>
     <script type="text/javascript" src="Modules/Navigator/EditorService.js"></script>
     <script type="text/javascript" src="Modules/Navigator/navigatorModule.js"></script>
 
+    <script type="text/javascript" src="Modules/Flashy/FlashyModule.js"></script>
+    <script type="text/javascript" src="Modules/Flashy/FlashyController.js"></script>
 
     <script type="text/javascript" src="app.js"></script>
 </body>
