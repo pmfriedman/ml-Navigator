@@ -33,9 +33,14 @@
             </div>
         </div>
     </div>
-    <div id="divEditor" class="editor col-md-8" data-ng-controller='EditorController'>
+    <div id="divEditor" class="editor col-md-8 full-height" data-ng-controller='EditorController'>
 
-        <div class="full-height">
+        <div class="row">
+            <button class="btn">Diff</button>
+            <button class="btn">Script Changes</button>
+            <button class="btn">Save</button>
+        </div>
+        <div class="row">
             <textarea ui-codemirror="{onLoad:codeMirrorLoaded}" data-ng-model="documentContent"></textarea>
         </div>
     </div>
