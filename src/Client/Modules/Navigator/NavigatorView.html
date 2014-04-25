@@ -15,7 +15,21 @@
         <h3>Contents</h3>
         <div>
             <div data-ng-repeat="pathInfo in currentPathContents">
-                <a data-ng-href="#navigator/{{pathInfo.path}}"><span>{{pathInfo.lastPartDisplay}}</span></a>
+                <script type="text/ng-template" id="myModalContent.html">
+                    <div class="modal-header">
+                        <h3>Metadata</h3>
+                    </div>
+                    <div class="modal-body">
+                        <span>{{ pathInfo.collections.length.toString() + " collections"}}</span>
+                        <ul>
+                            <li data-ng-repeat="collection in pathInfo.collections">{{collection}}</li>
+                        </ul>
+                    </div>
+                    <div class="modal-footer">
+                    </div>
+                </script>
+                <a href="" data-ng-click="openModal(pathInfo)"><span class="glyphicon glyphicon-plus-sign"></span></a>
+                <a data-ng-href="#{{urlPrefix + pathInfo.path}}"><span>{{pathInfo.lastPartDisplay}}</span></a>
             </div>
         </div>
     </div>

@@ -1,6 +1,6 @@
 var ResponseCodes;
 (function (ResponseCodes) {
-	function ResponseCodesModule = (function() {
+	var ResponseCodesModule = (function() {
 
 		function ResponseCodesModule() {
 
@@ -9,7 +9,15 @@ var ResponseCodes;
 		ResponseCodesModule.Name = "ResponseCodes";
 		ResponseCodesModule.Configure = function() {
 
-			angular.module(ResponseCodesModule.Name, []);
+			var module = angular.module(ResponseCodesModule.Name, ['app', 'ngGrid']);
+
+			// services
+			module.factory('ResponseCodesService', function() {
+				return new ResponseCodes.ResponseCodesService();
+			});
+
+			// controllers
+			module.controller("ResponseCodesController", ResponseCodes.ResponseCodesController);
 
 		};
 

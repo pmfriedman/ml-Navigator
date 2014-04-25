@@ -2,7 +2,7 @@ var Navigator;
 
 (function (Navigator) {
 	var ExplorerController = (function () {
-		function ExplorerController($scope, $rootScope, explorerService, $http, $location, $log, $routeParams, urlPrefix) {
+		function ExplorerController($scope, $rootScope, explorerService, $http, $location, $log, $routeParams, urlPrefix, $modal) {
 			_this = this;
 			$scope.databases = [];
 			$scope.currentPathParts = []
@@ -48,14 +48,28 @@ var Navigator;
 
                 var pathInfo = new Navigator.PathInfo(path);
 
-                // directory contents
-                if (pathInfo.pathType !== 2 /* Document */) {
-                    _this.explorerService.getDirectoryContents(_this.$http, pathInfo).then(function (contents) {
-                        $scope.currentPathContents = contents;
-                        var pathParts = _this.explorerService.getPathParts(pathInfo);
-                        $scope.currentPathParts = pathParts;
-                    });
-                }
+                var pathToGetContentsOf = pathInfo;
+                if (pathInfo.pathType === 2 /* Document */) {
+                	pathToGetContentsOf = new Navigator.PathInfo(pathInfo.getPathStrippedOfDocumentName());
+                };
+				_this.explorerService.getDirectoryContents(_this.$http, pathToGetContentsOf).then(function (contents) {
+                    $scope.currentPathContents = contents;
+                    var pathParts = _this.explorerService.getPathParts(pathInfo);
+                    $scope.currentPathParts = pathParts;
+                });
+            };
+
+            $scope.openModal = function(pi) {
+            	$modal.open({
+            		templateUrl: 'myModalContent.html',
+            		controller: Navigator.MetadataModalController,
+            		resolve: {
+            			pathInfo: function() {
+            				return pi;
+            			}
+            		}
+            	});
+
             };
 
 		    $scope.populateDatabases();

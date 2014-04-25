@@ -6,18 +6,21 @@
     <link rel="stylesheet" type="text/css" href="lib/codeMirror/codemirror.css" >
     <link rel="stylesheet" type="text/css" href="lib/codeMirror/the-matrix.css" >
     <link rel="stylesheet" type="text/css" href="css/styles.css">
+    <link rel="stylesheet" type="text/css" href="lib/angular-ui-ng-grid/ng-grid.min.css">
 </head>
 <body class="container">
 
     <div ng-view></div>
 
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.0.3.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular-route.js"></script>
     <script type="text/javascript" src="lib/vkbeautify/vkbeautify.0.99.00.beta.js"></script>
     <script src="lib/codeMirror/codemirror-compressed.js"></script>
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
     <script src="lib/angular-codemirror/ui-codemirror.min.js"></script>
+    <script src="lib/angular-ui-ng-grid/ng-grid-2.0.9.min.js"></script>
+    <script src="lib/angular-ui-bootstrap/ui-bootstrap-tpls-0.10.0.js"></script>
 
     <script type="text/javascript" src="AngularExtensions/Config.js"></script>
 
@@ -27,9 +30,18 @@
     <script type="text/javascript" src="Modules/Navigator/EditorController.js"></script>
     <script type="text/javascript" src="Modules/Navigator/EditorService.js"></script>
     <script type="text/javascript" src="Modules/Navigator/navigatorModule.js"></script>
+    <script type="text/javascript" src="Modules/Navigator/MetadataModalController.js"></script>    
 
     <script type="text/javascript" src="Modules/Flashy/FlashyModule.js"></script>
     <script type="text/javascript" src="Modules/Flashy/FlashyController.js"></script>
+
+    <script type="text/javascript" src="Modules/ResponseCodes/TDS.js"></script>
+    <script type="text/javascript" src="Modules/ResponseCodes/Concept.js"></script>
+    <script type="text/javascript" src="Modules/ResponseCodes/ConceptPair.js"></script>
+    <script type="text/javascript" src="Modules/ResponseCodes/ResponseCodesController.js"></script>
+    <script type="text/javascript" src="Modules/ResponseCodes/ResponseCodesModule.js"></script>
+    <script type="text/javascript" src="Modules/ResponseCodes/ResponseCodesService.js"></script>
+    <script type="text/javascript" src="Modules/ResponseCodes/TDS.js"></script>
 
     <script type="text/javascript" src="app.js"></script>
 </body>
