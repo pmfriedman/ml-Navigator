@@ -11,7 +11,7 @@ var Navigator;
 		};
 		NavigatorModule.Name = "Navigator";
 		NavigatorModule.Configure = function() {
-			var module = angular.module(NavigatorModule.Name, ['ui.bootstrap', 'ui.codemirror', 'app']);
+			var module = angular.module(NavigatorModule.Name, ['ui.codemirror']);
 
 
 			// configure
@@ -31,7 +31,6 @@ var Navigator;
 			// controllers
 			module.controller(Navigator.ExplorerController.Name, Navigator.ExplorerController);
 			module.controller(Navigator.EditorController.Name, Navigator.EditorController);
-			module.controller(Navigator.MetadataModalController.Name, Navigator.MetadataModalController);
 
 		};
 

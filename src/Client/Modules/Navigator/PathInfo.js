@@ -2,22 +2,21 @@
 var Navigator;
 (function (Navigator) {
     var PathInfo = (function () {
-        function PathInfo(path, collections) {
+        function PathInfo(path) {
             // strip off leading slash
             if (path.indexOf("/") === 0)
                 path = path.substr(1);
             this.path = path;
             this.databaseName = "";
             this.pathInDatabase = "";
-            this.collections = collections || [];
             this.setPathType(this.path);
         }
-        PathInfo.FromFullPath = function (path, collections) {
-            return new PathInfo(path, collections);
+        PathInfo.FromFullPath = function (path) {
+            return new PathInfo(path);
         };
 
-        PathInfo.FromParts = function (databaseName, pathWithinDatabase, collections) {
-            return new PathInfo(databaseName + "/" + pathWithinDatabase, collections);
+        PathInfo.FromParts = function (databaseName, pathWithinDatabase) {
+            return new PathInfo(databaseName + "/" + pathWithinDatabase);
         };
 
         PathInfo.prototype.setPathType = function (path) {
@@ -48,14 +47,6 @@ var Navigator;
             }
 
             this.lastPartDisplay = this.getDisplayForPart(this.lastPart);
-        };
-
-        PathInfo.prototype.getPathStrippedOfDocumentName = function() {
-            var lastSlashIx = this.path.lastIndexOf('/');
-            var retVal = this.path;
-            if (lastSlashIx !== -1)
-                retVal = this.path.substr(0, lastSlashIx + 1);
-            return retVal;
         };
 
         PathInfo.prototype.getDisplayForPart = function (part) {

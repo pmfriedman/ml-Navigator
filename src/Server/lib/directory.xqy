@@ -29,11 +29,7 @@ declare function directory:getSubdirectories($db as xs:string, $start as xs:inte
 			)[ $start to $end ]
 	return
 		for $dir in $subdirs
-		let $path := fn:concat($urimatch, $dir)
-		let $collections :=
-			for $collection in xdmp:document-get-collections($path)
-			return <collections>{$collection}</collections>
-		return <contents><path>{$path}</path>{$collections}</contents>
+		return fn:concat($urimatch, $dir)
 	',
 	((xs:QName("start"), $start), 
 	(xs:QName("end"), $end), 

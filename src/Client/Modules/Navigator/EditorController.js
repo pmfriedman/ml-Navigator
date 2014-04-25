@@ -4,12 +4,11 @@ var Navigator;
 	
 	EditorController = (function () {
 
-		function EditorController($scope, $location, $rootScope, $log, $http, $window, $routeParams, EditorService) {
+		function EditorController($scope, $location, $rootScope, $log, $http, $window, EditorService) {
 			var _this = this;
 			_this.$http = $http;
 			_this.EditorService = EditorService;
 			_this.$window = $window;
-			$scope.pathInDb = $routeParams.pathInDb || "";
 
 			$scope.documentContent = "";
 
@@ -61,18 +60,16 @@ var Navigator;
                 }
             };
 
-			/*var setupSubscriptions = function() {
+			var setupSubscriptions = function() {
 
 				$rootScope.$watch(
 					function() { return $location.path(); },
 					function() { $scope.updateViewDataFromPath($location.path()); });
 
-			};*/
+			};
 
 
-			//setupSubscriptions();
-
-			$scope.updateViewDataFromPath($scope.pathInDb);
+			setupSubscriptions();
 
 		};
 
