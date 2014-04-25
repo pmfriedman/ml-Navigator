@@ -3,7 +3,7 @@ var Navigator;
 (function (Navigator) {
 	var ExplorerService = (function() {
 		function ExplorerService() {
-            
+            var _this = this;
 			this.getAllDatabases = function ($http) {
                 var deferred = $.Deferred();
 
@@ -41,17 +41,32 @@ var Navigator;
                         deferred.resolve(contents);
                     });
                 } else {
-                    this.getDirectoryContentsNames($http, pathInfo.databaseName, pathInfo.pathInDatabase).then(function (childPaths) {
+                    this.getDirectoryContentsNames($http, pathInfo.databaseName, pathInfo.pathInDatabase).then(function (data) {
                         var contents = [];
 
-                        childPaths.forEach(function (childPath) {
-                            contents.push(Navigator.PathInfo.FromParts(pathInfo.databaseName, childPath));
-                        });
+                        var serverContents = _this.wrapInArray(data.result.contents);
+                        serverContents.forEach(function (serverContent) {
+                            contents.push(Navigator.PathInfo.FromParts(pathInfo.databaseName, serverContent.path, _this.wrapInArray(serverContent.collections)));
+                        });                        
                         deferred.resolve(contents);
                     });
                 }
 
                 return deferred.promise();
+            };
+
+            this.wrapInArray = function(value) {
+
+                var retVal = null;
+                if (value instanceof Array) {
+                    retVal = value;
+                } else if (value === null || value === undefined) {
+                    retVal = [];
+                } else {
+                    retVal = [ value ];
+                }
+
+                return retVal;
             };
 
 
