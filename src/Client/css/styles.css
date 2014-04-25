@@ -18,3 +18,8 @@ body, html{
 .editor {
     height: 100%;
 }
+
+.gridStyle {
+    border: 1px solid rgb(212,212,212);
+    height: 300px
+}
