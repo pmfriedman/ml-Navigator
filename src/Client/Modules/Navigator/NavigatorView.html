@@ -36,10 +36,11 @@
     <div id="divEditor" class="editor col-md-8 full-height" data-ng-controller='EditorController'>
 
         <div class="row">
-            <button class="btn">Diff</button>
+            <button class="btn" data-ng-click="diff()">Diff</button>
             <button class="btn">Script Changes</button>
-            <button class="btn">Save</button>
+            <button class="btn" data-ng-click="save()">Save</button>
         </div>
+        <div id="diff"></div>
         <div class="row">
             <textarea ui-codemirror="{onLoad:codeMirrorLoaded}" data-ng-model="documentContent"></textarea>
         </div>

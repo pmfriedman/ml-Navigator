@@ -4,12 +4,12 @@ var Navigator;
 	
 	EditorController = (function () {
 
-		function EditorController($scope, $location, $rootScope, $log, $http, $window, $routeParams, EditorService) {
+		function EditorController($scope, $location, $rootScope, $log, $window, $routeParams, EditorService) {
 			var _this = this;
-			_this.$http = $http;
 			_this.EditorService = EditorService;
 			_this.$window = $window;
 			$scope.pathInDb = $routeParams.pathInDb || "";
+			$scope.pathInfo = new Navigator.PathInfo($scope.pathInDb);
 
 			$scope.documentContent = "";
 
@@ -54,23 +54,23 @@ var Navigator;
                 var pathInfo = new Navigator.PathInfo(path);
 
                 if (pathInfo.pathType === 2 /* Document */) {
-                    _this.EditorService.getDocumentContents(_this.$http, pathInfo).then(function (contents) {
+                    _this.EditorService.getDocumentContents(pathInfo).then(function (contents) {
         				var prettifiedXML = vkbeautify.xml(contents);
                         return $scope.documentContent = prettifiedXML;
                     });
                 }
             };
 
-			/*var setupSubscriptions = function() {
+			$scope.save = function() {
+				$log.debug("saving");
+				_this.EditorService.save($scope.pathInfo, $scope.mirror.getDoc().getValue());
+			};
 
-				$rootScope.$watch(
-					function() { return $location.path(); },
-					function() { $scope.updateViewDataFromPath($location.path()); });
-
-			};*/
-
-
-			//setupSubscriptions();
+			$scope.diff = function() {
+				var dmp = new diff_match_patch();
+				var diffs = dmp.diff_main($scope.documentContent, $scope.mirror.getDoc().getValue());
+				$('#diff').html(dmp.diff_prettyHtml(diffs));
+			};
 
 			$scope.updateViewDataFromPath($scope.pathInDb);
 

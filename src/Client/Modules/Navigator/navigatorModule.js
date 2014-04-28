@@ -22,8 +22,8 @@ var Navigator;
 			module.factory('explorerService', function() {
 				return new Navigator.ExplorerService();
 			});
-			module.factory(Navigator.EditorService.Name, function() {
-				return new Navigator.EditorService();
+			module.factory(Navigator.EditorService.Name, function($http, $log) {
+				return new Navigator.EditorService($http, $log);
 			});
 
 
