@@ -12,7 +12,7 @@ var Navigator;
 			this.$http = $http;
 			this.explorerService = explorerService;
 
-			$scope.urlPrefix = urlPrefix.navigator;
+			$scope.urlPrefix = urlPrefix.navigator.url;
 
 
 			$log.debug("path in db: " + $routeParams.pathInDb);
