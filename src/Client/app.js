@@ -1,6 +1,6 @@
 Navigator.NavigatorModule.Configure();
 
-var app = angular.module("app", [Navigator.NavigatorModule.Name, 'ngRoute']);
+var app = angular.module("app", [Navigator.NavigatorModule.Name, 'ngRoute', 'xeditable']);
 
 app.constant('urlPrefix', {
 	navigator: { name: 'Documents', url: '/navigator/' }
@@ -36,3 +36,7 @@ app.controller('navController', ['$scope', '$location', 'urlPrefix', function($s
 	}
 	
 }]);
+
+app.run(function(editableOptions) {
+	editableOptions.theme = 'bs3';
+})

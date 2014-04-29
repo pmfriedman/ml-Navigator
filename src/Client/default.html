@@ -7,12 +7,12 @@
     <link rel="stylesheet" type="text/css" href="lib/codeMirror/the-matrix.css" >
     <link rel="stylesheet" type="text/css" href="css/styles.css">
     <link rel="stylesheet" type="text/css" href="lib/angular-ui-ng-grid/ng-grid.min.css">
+    <link rel="stylesheet" type="text/css" href="lib/angular-xeditable/xeditable.css">
 </head>
 <body>
 
     <nav class="navbar navbar-default" role="navigation" data-ng-controller="navController">
         <div class="container-fluid">
-        <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
                     <span class="sr-only">Toggle navigation</span>
@@ -26,8 +26,8 @@
                 <ul class="nav navbar-nav">
                     <li data-ng-repeat="area in areas" data-ng-class="navClass('{{area.url}}')"><a data-ng-href="#{{area.url}}">{{area.name}}</a></li>
                 </ul>     
-            </div><!-- /.navbar-collapse -->
-        </div><!-- /.container-fluid -->
+            </div>
+        </div>
     </nav>
 
 
@@ -46,6 +46,7 @@
     <script src="lib/angular-codemirror/ui-codemirror.min.js"></script>
     <script src="lib/angular-ui-ng-grid/ng-grid-2.0.9.min.js"></script>
     <script src="lib/angular-ui-bootstrap/ui-bootstrap-tpls-0.10.0.js"></script>
+    <script src="lib/angular-xeditable/xeditable.js"></script>
 
     <script src="lib/deltajs/diff_match_patch_uncompressed.js"></script>
 
