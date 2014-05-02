@@ -22,8 +22,11 @@ var Navigator;
 			module.factory('explorerService', function() {
 				return new Navigator.ExplorerService();
 			});
-			module.factory(Navigator.EditorService.Name, function() {
-				return new Navigator.EditorService();
+			module.factory(Navigator.EditorService.Name, function($http, $log) {
+				return new Navigator.EditorService($http, $log);
+			});
+			module.factory(Navigator.SearchService.Name, function($http, $log) {
+				return new Navigator.SearchService($http, $log);
 			});
 
 
@@ -31,6 +34,7 @@ var Navigator;
 			// controllers
 			module.controller(Navigator.ExplorerController.Name, Navigator.ExplorerController);
 			module.controller(Navigator.EditorController.Name, Navigator.EditorController);
+			module.controller(Navigator.SearchController.Name, Navigator.SearchController);
 			module.controller(Navigator.MetadataModalController.Name, Navigator.MetadataModalController);
 
 		};

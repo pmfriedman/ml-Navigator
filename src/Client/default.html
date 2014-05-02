@@ -6,11 +6,34 @@
     <link rel="stylesheet" type="text/css" href="lib/codeMirror/codemirror.css" >
     <link rel="stylesheet" type="text/css" href="lib/codeMirror/the-matrix.css" >
     <link rel="stylesheet" type="text/css" href="css/styles.css">
-    <link rel="stylesheet" type="text/css" href="lib/angular-ui-ng-grid/ng-grid.min.css">
 </head>
-<body class="container">
+<body>
 
-    <div ng-view></div>
+    <nav class="navbar navbar-default" role="navigation" data-ng-controller="navController">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">MarkLogic</a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+                <ul class="nav navbar-nav">
+                    <li data-ng-repeat="area in areas" data-ng-class="navClass('{{area.url}}')"><a data-ng-href="#{{area.url}}">{{area.name}}</a></li>
+                </ul>     
+            </div>
+        </div>
+    </nav>
+
+
+
+
+    <div class="container">
+        <div ng-view></div>
+    </div>
 
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.0.3.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.js"></script>
@@ -19,7 +42,6 @@
     <script src="lib/codeMirror/codemirror-compressed.js"></script>
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
     <script src="lib/angular-codemirror/ui-codemirror.min.js"></script>
-    <script src="lib/angular-ui-ng-grid/ng-grid-2.0.9.min.js"></script>
     <script src="lib/angular-ui-bootstrap/ui-bootstrap-tpls-0.10.0.js"></script>
 
     <script type="text/javascript" src="AngularExtensions/Config.js"></script>
@@ -29,6 +51,8 @@
     <script type="text/javascript" src="Modules/Navigator/explorerController.js"></script>
     <script type="text/javascript" src="Modules/Navigator/EditorController.js"></script>
     <script type="text/javascript" src="Modules/Navigator/EditorService.js"></script>
+    <script type="text/javascript" src="Modules/Navigator/SearchController.js"></script>
+    <script type="text/javascript" src="Modules/Navigator/SearchService.js"></script>
     <script type="text/javascript" src="Modules/Navigator/navigatorModule.js"></script>
     <script type="text/javascript" src="Modules/Navigator/MetadataModalController.js"></script>
 

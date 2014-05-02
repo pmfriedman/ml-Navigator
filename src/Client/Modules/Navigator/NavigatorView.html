@@ -1,45 +1,55 @@
 <div class="row main-row">
-    <div id="divExplorer" class="explorer col-md-4" data-ng-controller='ExplorerController'>
-        <h3>Databases</h3>
-        <div>
-            <select data-ng-model="selectedDatabase" data-ng-options='db.databaseName for db in databases' data-ng-change='onDatabaseSelected()'></select>
+    <div class="col-md-4">
+        <div class="row" data-ng-controller="SearchController">
+            <input type="text" data-ng-model="pattern" placeholder="URI Search..." 
+                typeahead="match for match in getMatches($viewValue)" typeahead-loading="loadingMatches"
+                typeahead-on-select="patternSelected($item)" typeahead-wait-ms="500" typeahead-editable="false"
+                class="form-control">
+            <i ng-show="loadingMatches" class="glyphicon glyphicon-refresh"></i>
         </div>
+        <div id="divExplorer" class="explorer row" data-ng-controller='ExplorerController'>
+            <h3>Databases</h3>
+            <div>
+                <select data-ng-model="selectedDatabase" data-ng-options='db.databaseName for db in databases' 
+                    data-ng-change='onDatabaseSelected()' class="form-control">
+                </select>
+            </div>
 
-        <h3>Breadcrumbs</h3>
-        <div data-ng-repeat="pathInfo in currentPathParts">
-            <span>
-                <a data-ng-href="#{{urlPrefix + pathInfo.path}}" ><span>{{pathInfo.lastPartDisplay}}</span></a>
-            </span>
-        </div>
+            <h3>Breadcrumbs</h3>
+            <div data-ng-repeat="pathInfo in currentPathParts">
+                <span>
+                    <a data-ng-href="#{{urlPrefix + pathInfo.path}}" ><span>{{pathInfo.lastPartDisplay}}</span></a>
+                </span>
+            </div>
 
-        <h3>Contents</h3>
-        <div>
-            <div data-ng-repeat="pathInfo in currentPathContents">
-                <script type="text/ng-template" id="myModalContent.html">
-                    <div class="modal-header">
-                        <h3>Metadata</h3>
-                    </div>
-                    <div class="modal-body">
-                        <span>{{ pathInfo.collections.length.toString() + " collections"}}</span>
-                        <ul>
-                            <li data-ng-repeat="collection in pathInfo.collections">{{collection}}</li>
-                        </ul>
-                    </div>
-                    <div class="modal-footer">
-                    </div>
-                </script>
-                <a href="" data-ng-click="openModal(pathInfo)"><span class="glyphicon glyphicon-plus-sign"></span></a>
-                <a data-ng-href="#{{urlPrefix + pathInfo.path}}"><span>{{pathInfo.lastPartDisplay}}</span></a>
+            <h3>Contents</h3>
+            <div>
+                <div data-ng-repeat="pathInfo in currentPathContents">
+                    <script type="text/ng-template" id="myModalContent.html">
+                        <div class="modal-header">
+                            <h3>Metadata</h3>
+                        </div>
+                        <div class="modal-body">
+                            <span>{{ pathInfo.collections.length.toString() + " collections"}}</span>
+                            <ul>
+                                <li data-ng-repeat="collection in pathInfo.collections">{{collection}}</li>
+                            </ul>
+                        </div>
+                        <div class="modal-footer">
+                        </div>
+                    </script>
+                    <a href="" data-ng-click="openModal(pathInfo)"><span class="glyphicon glyphicon-plus-sign"></span></a>
+                    <a data-ng-href="#{{urlPrefix + pathInfo.path}}"><span>{{pathInfo.lastPartDisplay}}</span></a>
+                </div>
             </div>
         </div>
     </div>
     <div id="divEditor" class="editor col-md-8 full-height" data-ng-controller='EditorController'>
 
         <div class="row">
-            <button class="btn">Diff</button>
-            <button class="btn">Script Changes</button>
-            <button class="btn">Save</button>
+            <button class="btn" data-ng-click="save()">Save</button>
         </div>
+        <div id="diff"></div>
         <div class="row">
             <textarea ui-codemirror="{onLoad:codeMirrorLoaded}" data-ng-model="documentContent"></textarea>
         </div>
