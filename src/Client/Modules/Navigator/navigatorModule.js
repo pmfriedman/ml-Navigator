@@ -25,12 +25,16 @@ var Navigator;
 			module.factory(Navigator.EditorService.Name, function($http, $log) {
 				return new Navigator.EditorService($http, $log);
 			});
+			module.factory(Navigator.SearchService.Name, function($http, $log) {
+				return new Navigator.SearchService($http, $log);
+			});
 
 
 
 			// controllers
 			module.controller(Navigator.ExplorerController.Name, Navigator.ExplorerController);
 			module.controller(Navigator.EditorController.Name, Navigator.EditorController);
+			module.controller(Navigator.SearchController.Name, Navigator.SearchController);
 			module.controller(Navigator.MetadataModalController.Name, Navigator.MetadataModalController);
 
 		};
