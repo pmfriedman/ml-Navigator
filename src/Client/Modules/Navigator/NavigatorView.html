@@ -1,8 +1,10 @@
 <div class="row main-row">
     <div class="col-md-4">
         <div class="row" data-ng-controller="SearchController">
-            <input type="text" data-ng-model="pattern" placeholder="Search..." 
-                typeahead="match for match in getMatches($viewValue)" typeahead-loading="loadingMatches" class="form-control">
+            <input type="text" data-ng-model="pattern" placeholder="URI Search..." 
+                typeahead="match for match in getMatches($viewValue)" typeahead-loading="loadingMatches"
+                typeahead-on-select="patternSelected($item)" typeahead-wait-ms="500" typeahead-editable="false"
+                class="form-control">
             <i ng-show="loadingMatches" class="glyphicon glyphicon-refresh"></i>
         </div>
         <div id="divExplorer" class="explorer row" data-ng-controller='ExplorerController'>

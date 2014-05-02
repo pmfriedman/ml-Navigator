@@ -10,13 +10,16 @@ var Navigator;
 			this.$http = $http;
 			this.$log = $log;
 
-            this.getMatches = function(pattern) {
+            this.getMatches = function(databaseName, pattern) {
             	var deferred = $.Deferred();
 
-            	setTimeout(function() {
-            		deferred.resolve( ["hi", "there"]);
-            	},
-            	1000);
+
+                _this.$http({method:'GET', url:"/Server/search.xqy?db=" + databaseName + "&pattern=" + pattern })
+	        	.success(function(data) {
+	        		var unwrappedData = angular.fromJson(data);
+	        		deferred.resolve(unwrappedData);
+	        	});
+
 
             	return deferred.promise();
 
