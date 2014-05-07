@@ -1,6 +1,7 @@
 xquery version "1.0-ml";
 import module namespace json = "http://marklogic.com/json" at "/MarkLogic/appservices/utils/json.xqy";
 import module namespace json1="http://marklogic.com/xdmp/json" at "/MarkLogic/json/json.xqy";
+import module namespace sec = "db-security" at "db-security-check.xqy";
 
 declare namespace json2="http://marklogic.com/xdmp/json/basic";
 
@@ -8,6 +9,8 @@ declare namespace json2="http://marklogic.com/xdmp/json/basic";
 
 declare variable $db := xs:string(xdmp:get-request-field("db"));
 declare variable $data-json := xs:string(xdmp:get-request-field("path"));
+
+let $_ := sec:check-db-access($db)
 		
 let $module-location := "doc-save-module.xqy"
 
