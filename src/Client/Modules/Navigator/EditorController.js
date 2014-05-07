@@ -4,10 +4,11 @@ var Navigator;
 	
 	EditorController = (function () {
 
-		function EditorController($scope, $location, $rootScope, $log, $window, $routeParams, EditorService) {
+		function EditorController($scope, $location, $rootScope, $log, $window, $routeParams, $modal, EditorService) {
 			var _this = this;
 			_this.EditorService = EditorService;
 			_this.$window = $window;
+			$scope.$modal = $modal;
 			$scope.pathInDb = $routeParams.pathInDb || "";
 			$scope.pathInfo = new Navigator.PathInfo($scope.pathInDb);
 

@@ -49,7 +49,19 @@
         <div class="row">
             <button class="btn" data-ng-click="diff()">Diff</button>
             <button class="btn">Script Changes</button>
-            <button class="btn" data-ng-click="save()">Save</button>
+            <button class="btn" data-ng-click="$modal.open({ templateUrl: 'saveModal.html' })">Save</button>
+            <script type="text/ng-template" id="saveModal.html">
+                <div class="modal-header">
+                    <h3>Confirm Save</h3>
+                </div>
+                <div class="modal-body">
+                    <div>Are you sure?  Document will be written immediately!</div>
+                    <div class="modal-footer">
+                        <button class="btn" data-ng-click="save(); $close()">Save</button>
+                        <button class="btn" data-ng-click="$dismiss()">Cancel</button>
+                    </div>
+                </div>
+            </script>
         </div>
         <div id="diff"></div>
         <div class="row">
