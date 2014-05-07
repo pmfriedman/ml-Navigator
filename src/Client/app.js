@@ -1,6 +1,7 @@
 Navigator.NavigatorModule.Configure();
+Permissions.PermissionsModule.Configure();
 
-var app = angular.module("app", [Navigator.NavigatorModule.Name, 'ngRoute', 'xeditable']);
+var app = angular.module("app", [Navigator.NavigatorModule.Name, Permissions.PermissionsModule.Name, 'ngRoute', 'xeditable']);
 
 app.constant('urlPrefix', {
 	navigator: { name: 'Documents', url: '/navigator/' }

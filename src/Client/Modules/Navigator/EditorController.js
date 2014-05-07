@@ -4,13 +4,14 @@ var Navigator;
 	
 	EditorController = (function () {
 
-		function EditorController($scope, $location, $rootScope, $log, $window, $routeParams, $modal, EditorService) {
+		function EditorController($scope, $location, $rootScope, $log, $window, $routeParams, $modal, EditorService, CurrentUserPermissions) {
 			var _this = this;
 			_this.EditorService = EditorService;
 			_this.$window = $window;
 			$scope.$modal = $modal;
 			$scope.pathInDb = $routeParams.pathInDb || "";
 			$scope.pathInfo = new Navigator.PathInfo($scope.pathInDb);
+			$scope.canSave = CurrentUserPermissions.data.canSaveDocuments;
 
 			$scope.documentContent = "";
 
