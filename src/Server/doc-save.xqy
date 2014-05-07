@@ -10,13 +10,6 @@ declare namespace json2="http://marklogic.com/xdmp/json/basic";
 declare variable $db := xs:string(xdmp:get-request-field("db"));
 declare variable $data-json := xs:string(xdmp:get-request-field("path"));
 
-declare function local:check-can-save() {
-	(: Customize this as needed. :)
-	if (fn:true())
-	then ()
-	else fn:error(xs:QName('SAVE-PERMISSIONS-ERROR'), "User does not have permissions to save documents")
-};
-
 let $_ := perms:check-db-access($db)
 let $_ := perms:check-can-save()
 		
