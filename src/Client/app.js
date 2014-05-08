@@ -38,6 +38,13 @@ app.controller('navController', ['$scope', '$location', 'urlPrefix', function($s
 	
 }]);
 
+app.factory('RootPath', [function(){
+	return function (){
+		// Customize as necessary
+		return '/';		
+	};
+}])
+
 app.run(function(editableOptions) {
 	editableOptions.theme = 'bs3';
 })

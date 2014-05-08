@@ -2,8 +2,9 @@ var Navigator;
 
 (function (Navigator) {
 	var ExplorerService = (function() {
-		function ExplorerService() {
+		function ExplorerService(RootPath) {
             var _this = this;
+            this.RootPath = RootPath;
 			this.getAllDatabases = function ($http) {
                 var deferred = $.Deferred();
 
@@ -20,7 +21,7 @@ var Navigator;
             };
             this.getAllDatabaseNames = function($http) {
             	var deferred = $.Deferred();
-		        $http({method:'GET', url:"/Server/db.xqy"})
+		        $http({method:'GET', url: _this.RootPath() + "Server/db.xqy"})
 	        	.success(function(data) {
 	        		deferred.resolve(data);
 	        	});
@@ -72,7 +73,7 @@ var Navigator;
 
             this.getDirectoryContentsNames = function ($http, databaseName, parentPath) {
 		        var deferred = $.Deferred();
-		        $http({method:'GET', url:"/Server/dir.xqy?db=" + databaseName + "&urimatch=" + parentPath})
+		        $http({method:'GET', url: _this.RootPath() + "Server/dir.xqy?db=" + databaseName + "&urimatch=" + parentPath})
 		        .success(function(data){
 		        	deferred.resolve(data);
 		        });

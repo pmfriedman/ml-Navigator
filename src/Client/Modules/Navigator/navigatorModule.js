@@ -19,14 +19,14 @@ var Navigator;
 			AngularExtensions.Config.ConfigureHashBangLocation(NavigatorModule.Name);
 
 			// services
-			module.factory('explorerService', function() {
-				return new Navigator.ExplorerService();
+			module.factory('explorerService', function(RootPath) {
+				return new Navigator.ExplorerService(RootPath);
 			});
-			module.factory(Navigator.EditorService.Name, function($http, $log) {
-				return new Navigator.EditorService($http, $log);
+			module.factory(Navigator.EditorService.Name, function($http, $log, RootPath) {
+				return new Navigator.EditorService($http, $log, RootPath);
 			});
-			module.factory(Navigator.SearchService.Name, function($http, $log) {
-				return new Navigator.SearchService($http, $log);
+			module.factory(Navigator.SearchService.Name, function($http, $log, RootPath) {
+				return new Navigator.SearchService($http, $log, RootPath);
 			});
 
 

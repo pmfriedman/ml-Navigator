@@ -11,9 +11,9 @@ var Permissions;
 
 			module.value('CurrentUserPermissions', {});
 
-			module.run(['CurrentUserPermissions', '$http', function(CurrentUserPermissions, $http) {
+			module.run(['CurrentUserPermissions', '$http', 'RootPath', function(CurrentUserPermissions, $http, RootPath) {
 
-		        $http({method:'GET', url:"/Server/Security/permissions.xqy"})
+		        $http({method:'GET', url: RootPath() + "Server/Security/permissions.xqy"})
 	        	.success(function(data) {
 	        		CurrentUserPermissions.data = data;
 	        	});				
