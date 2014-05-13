@@ -45,9 +45,8 @@ var Navigator;
                     this.getDirectoryContentsNames($http, pathInfo.databaseName, pathInfo.pathInDatabase).then(function (data) {
                         var contents = [];
 
-                        var serverContents = _this.wrapInArray(data.result.contents);
-                        serverContents.forEach(function (serverContent) {
-                            contents.push(Navigator.PathInfo.FromParts(pathInfo.databaseName, serverContent.path, _this.wrapInArray(serverContent.collections)));
+                        data.forEach(function (serverContent) {
+                            contents.push(Navigator.PathInfo.FromParts(pathInfo.databaseName, serverContent.uri, serverContent.collections));
                         });                        
                         deferred.resolve(contents);
                     });
@@ -56,24 +55,10 @@ var Navigator;
                 return deferred.promise();
             };
 
-            this.wrapInArray = function(value) {
-
-                var retVal = null;
-                if (value instanceof Array) {
-                    retVal = value;
-                } else if (value === null || value === undefined) {
-                    retVal = [];
-                } else {
-                    retVal = [ value ];
-                }
-
-                return retVal;
-            };
-
 
             this.getDirectoryContentsNames = function ($http, databaseName, parentPath) {
 		        var deferred = $.Deferred();
-		        $http({method:'GET', url: _this.RootPath() + "Server/dir.xqy?db=" + databaseName + "&urimatch=" + parentPath})
+		        $http({method:'GET', url: _this.RootPath() + "Server/Navigator/directory-contents.xqy?db=" + databaseName + "&urimatch=" + parentPath})
 		        .success(function(data){
 		        	deferred.resolve(data);
 		        });
