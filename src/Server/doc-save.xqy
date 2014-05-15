@@ -11,7 +11,7 @@ declare variable $db := xs:string(xdmp:get-request-field("db"));
 declare variable $data-json := xs:string(xdmp:get-request-field("path"));
 
 let $_ := perms:check-db-access($db)
-let $_ := perms:check-can-save()
+let $_ := perms:check-can-save-docs()
 		
 let $module-location := "doc-save-module.xqy"
 
