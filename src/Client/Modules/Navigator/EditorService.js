@@ -18,7 +18,7 @@ var Navigator;
 
                 var deferred = $.Deferred();
 
-                _this.$http({method:'GET', url: _this.RootPath() + "Server/doc.xqy?db=" + pathInfo.databaseName + "&uri=" + pathInfo.pathInDatabase })
+                _this.$http({method:'GET', url: _this.RootPath() + "Server/Navigator/doc-get.xqy?db=" + pathInfo.databaseName + "&uri=" + pathInfo.pathInDatabase })
 	        	.success(function(data) {
 	        		var unwrappedData = angular.fromJson(data);
 	        		deferred.resolve(unwrappedData);
