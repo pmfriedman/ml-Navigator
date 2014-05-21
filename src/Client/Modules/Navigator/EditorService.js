@@ -36,7 +36,7 @@ var Navigator;
 
                 var data = { path: pathInfo.pathInDatabase, content: content};
 
-            	_this.$http({method:'PUT', url: _this.RootPath() + 'Server/doc-save.xqy?db=' + pathInfo.databaseName, data: angular.toJson(data)})
+            	_this.$http({method:'PUT', url: _this.RootPath() + 'Server/Navigator/doc-save.xqy?db=' + pathInfo.databaseName, data: angular.toJson(data)})
             	.success(function(data) {
 	        		var unwrappedData = angular.fromJson(data);
 	        		_this.$log.debug(unwrappedData);

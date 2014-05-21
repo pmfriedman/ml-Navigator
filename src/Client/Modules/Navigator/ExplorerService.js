@@ -21,7 +21,7 @@ var Navigator;
             };
             this.getAllDatabaseNames = function($http) {
             	var deferred = $.Deferred();
-		        $http({method:'GET', url: _this.RootPath() + "Server/db.xqy"})
+		        $http({method:'GET', url: _this.RootPath() + "Server/Navigator/get-database-names.xqy"})
 	        	.success(function(data) {
 	        		deferred.resolve(data);
 	        	});
