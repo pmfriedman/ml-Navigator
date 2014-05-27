@@ -66,6 +66,13 @@ var Navigator;
             }
             return friendly;
         };
+
+        PathInfo.prototype.getDocumentExtension = function() {
+            var ixDot = this.path.lastIndexOf('.');
+            var extension = ixDot >= 0 ? this.path.substr(ixDot + 1) : "";
+            return extension;
+        };
+
         return PathInfo;
     })();
     Navigator.PathInfo = PathInfo;

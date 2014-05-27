@@ -4,11 +4,12 @@ var Navigator;
 
 	var EditorService = (function () {
 
-		function EditorService($http, $log) {
+		function EditorService($http, $log, RootPath) {
 
 			var _this = this;
 			this.$http = $http;
 			this.$log = $log;
+			this.RootPath = RootPath;
 
             this.getDocumentContents = function (pathInfo) {
                 if (pathInfo.pathType !== 2 /* Document */) {
@@ -17,7 +18,7 @@ var Navigator;
 
                 var deferred = $.Deferred();
 
-                _this.$http({method:'GET', url:"/Server/doc.xqy?db=" + pathInfo.databaseName + "&uri=" + pathInfo.pathInDatabase })
+                _this.$http({method:'GET', url: _this.RootPath() + "Server/Navigator/doc-get.xqy?db=" + pathInfo.databaseName + "&uri=" + pathInfo.pathInDatabase })
 	        	.success(function(data) {
 	        		var unwrappedData = angular.fromJson(data);
 	        		deferred.resolve(unwrappedData);
@@ -35,7 +36,7 @@ var Navigator;
 
                 var data = { path: pathInfo.pathInDatabase, content: content};
 
-            	_this.$http({method:'PUT', url:'/Server/doc-save.xqy?db=' + pathInfo.databaseName, data: angular.toJson(data)})
+            	_this.$http({method:'PUT', url: _this.RootPath() + 'Server/Navigator/doc-save.xqy?db=' + pathInfo.databaseName, data: angular.toJson(data)})
             	.success(function(data) {
 	        		var unwrappedData = angular.fromJson(data);
 	        		_this.$log.debug(unwrappedData);

@@ -4,23 +4,32 @@ var Navigator;
 	
 	EditorController = (function () {
 
-		function EditorController($scope, $location, $rootScope, $log, $window, $routeParams, EditorService) {
+		function EditorController($scope, $location, $rootScope, $log, $window, $routeParams, $modal, EditorService, CurrentUserPermissions) {
 			var _this = this;
 			_this.EditorService = EditorService;
 			_this.$window = $window;
+			$scope.$modal = $modal;
 			$scope.pathInDb = $routeParams.pathInDb || "";
 			$scope.pathInfo = new Navigator.PathInfo($scope.pathInDb);
+			$scope.canSave = CurrentUserPermissions.data.canSaveDocuments;
 
 			$scope.documentContent = "";
 
 			$scope.codeMirrorLoaded = function(mirror) {
+				var extension = $scope.pathInfo.getDocumentExtension();
+
+				var mode =
+					extension == 'xq' || extension == 'xqy'
+					? 'application/xquery'
+					: 'text/xml';
+
 				$scope.mirror = mirror;
 				mirror.setOption('theme', "the-matrix");
 				mirror.setOption('indentUnit', 4);
 				mirror.setOption('tabSize', 4);
 				mirror.setOption('lineNumbers', true);
 				mirror.setOption('styleActiveLine', true);
-				mirror.setOption('mode', "text/xml");
+				mirror.setOption('mode', mode);
 				mirror.setOption('extraKeys', {
 	                Tab: function(cm) {
 	                    if (cm.getSelection().length) {
@@ -55,7 +64,10 @@ var Navigator;
 
                 if (pathInfo.pathType === 2 /* Document */) {
                     _this.EditorService.getDocumentContents(pathInfo).then(function (contents) {
-        				var prettifiedXML = vkbeautify.xml(contents);
+        				var prettifiedXML =
+        					pathInfo.getDocumentExtension() === "xml"
+        					? vkbeautify.xml(contents)
+        					: contents;
                         return $scope.documentContent = prettifiedXML;
                     });
                 }

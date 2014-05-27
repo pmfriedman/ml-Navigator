@@ -1,6 +1,7 @@
 Navigator.NavigatorModule.Configure();
+Permissions.PermissionsModule.Configure();
 
-var app = angular.module("app", [Navigator.NavigatorModule.Name, 'ngRoute']);
+var app = angular.module("app", [Navigator.NavigatorModule.Name, Permissions.PermissionsModule.Name, 'ngRoute', 'xeditable']);
 
 app.constant('urlPrefix', {
 	navigator: { name: 'Documents', url: '/navigator/' }
@@ -36,3 +37,14 @@ app.controller('navController', ['$scope', '$location', 'urlPrefix', function($s
 	}
 	
 }]);
+
+app.factory('RootPath', [function(){
+	return function (){
+		// Customize as necessary
+		return '/';		
+	};
+}])
+
+app.run(function(editableOptions) {
+	editableOptions.theme = 'bs3';
+})
