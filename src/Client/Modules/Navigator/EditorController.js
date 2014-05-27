@@ -16,13 +16,20 @@ var Navigator;
 			$scope.documentContent = "";
 
 			$scope.codeMirrorLoaded = function(mirror) {
+				var extension = $scope.pathInfo.getDocumentExtension();
+
+				var mode =
+					extension == 'xq' || extension == 'xqy'
+					? 'application/xquery'
+					: 'text/xml';
+
 				$scope.mirror = mirror;
 				mirror.setOption('theme', "the-matrix");
 				mirror.setOption('indentUnit', 4);
 				mirror.setOption('tabSize', 4);
 				mirror.setOption('lineNumbers', true);
 				mirror.setOption('styleActiveLine', true);
-				mirror.setOption('mode', "text/xml");
+				mirror.setOption('mode', mode);
 				mirror.setOption('extraKeys', {
 	                Tab: function(cm) {
 	                    if (cm.getSelection().length) {
