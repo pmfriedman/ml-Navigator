@@ -64,7 +64,10 @@ var Navigator;
 
                 if (pathInfo.pathType === 2 /* Document */) {
                     _this.EditorService.getDocumentContents(pathInfo).then(function (contents) {
-        				var prettifiedXML = vkbeautify.xml(contents);
+        				var prettifiedXML =
+        					pathInfo.getDocumentExtension() === "xml"
+        					? vkbeautify.xml(contents)
+        					: contents;
                         return $scope.documentContent = prettifiedXML;
                     });
                 }
@@ -73,12 +76,6 @@ var Navigator;
 			$scope.save = function() {
 				$log.debug("saving");
 				_this.EditorService.save($scope.pathInfo, $scope.mirror.getDoc().getValue());
-			};
-
-			$scope.diff = function() {
-				var dmp = new diff_match_patch();
-				var diffs = dmp.diff_main($scope.documentContent, $scope.mirror.getDoc().getValue());
-				$('#diff').html(dmp.diff_prettyHtml(diffs));
 			};
 
 			$scope.updateViewDataFromPath($scope.pathInDb);
