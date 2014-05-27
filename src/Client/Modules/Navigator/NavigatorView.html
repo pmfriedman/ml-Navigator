@@ -1,5 +1,20 @@
-<div class="row main-row">
+<div class="row main-row" data-ng-controller='ExplorerController'>
+    
+    <div class="row">
+        <h3>
+            <span data-ng-repeat="pathInfo in currentPathParts">
+                <a data-ng-href="#{{urlPrefix + pathInfo.path}}" ><span>{{pathInfo.lastPartDisplay}}</span></a>
+            </span>
+        </h3>
+    </div>
     <div class="col-md-4">
+        <h3 class="row">Databases</h3>
+        <div class="row">
+            <select data-ng-model="selectedDatabase" data-ng-options='db.databaseName for db in databases' 
+                data-ng-change='onDatabaseSelected()' class="form-control">
+            </select>
+        </div>
+        <h3></h3>
         <div class="row" data-ng-controller="SearchController">
             <input type="text" data-ng-model="pattern" placeholder="URI Search..." 
                 typeahead="match for match in getMatches($viewValue)" typeahead-loading="loadingMatches"
@@ -7,20 +22,7 @@
                 class="form-control">
             <i ng-show="loadingMatches" class="glyphicon glyphicon-refresh"></i>
         </div>
-        <div id="divExplorer" class="explorer row" data-ng-controller='ExplorerController'>
-            <h3>Databases</h3>
-            <div>
-                <select data-ng-model="selectedDatabase" data-ng-options='db.databaseName for db in databases' 
-                    data-ng-change='onDatabaseSelected()' class="form-control">
-                </select>
-            </div>
-
-            <h3>Breadcrumbs</h3>
-            <div data-ng-repeat="pathInfo in currentPathParts">
-                <span>
-                    <a data-ng-href="#{{urlPrefix + pathInfo.path}}" ><span>{{pathInfo.lastPartDisplay}}</span></a>
-                </span>
-            </div>
+        <div id="divExplorer" class="explorer row">            
 
             <h3>Contents</h3>
             <div>
