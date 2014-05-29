@@ -13,10 +13,14 @@ var Permissions;
 
 			module.run(['CurrentUserPermissions', '$http', 'RootPath', function(CurrentUserPermissions, $http, RootPath) {
 
+				var deferred = $.Deferred();
+
 		        $http({method:'GET', url: RootPath() + "Server/Security/permissions.xqy"})
 	        	.success(function(data) {
-	        		CurrentUserPermissions.data = data;
-	        	});				
+	        		deferred.resolve(data);
+	        	});
+
+	        	CurrentUserPermissions.getData = deferred.promise;				
 			}]);
 
 		};
