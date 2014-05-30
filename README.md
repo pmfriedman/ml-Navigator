@@ -1,17 +1,16 @@
-ml-Navigator
-============
+#ml-Navigator
 
-Introduction
+##Introduction
 The Navigator exposes ML databases as an easily navigable file-system.
 
 The Navigator also can be used as an extensible platform for custom tools.
 
-User Guide
-Accessing
+##User Guide
+###Accessing
 
 To access the Navigator, navigate to [AppServerURL]/[NavigatorRoot]/Client/default.html.
 
-The Documents Tab
+###The Documents Tab
 
 Allows you to navigate through the selected database as if moving through a file system explorer.
 
@@ -24,42 +23,42 @@ To update documents (will not be available if you don’t have permissions): Sel
 To URI search: Select a database, then type into the search box.
 
 
-Developer Guide
+##Developer Guide
 
-Architecture
+###Architecture
 
 The Navigator is a Single Page App implemented with Google’s AngularJS framework.  It makes AJAX calls to server-side xquery modules to retrieve json-formatted data as necessary.
 
 Each tool/feature is implemented as an Angular module with a corresponding set of xquery modules.
 
-About AngularJS
+###About AngularJS
 
 Angular has a bit of a learning curve and relatively sparse documentation, but using the existing code as a model and googling as needed, maintaining and extending the Navigator is possible without becoming an Angular expert.
 
-Deployment
+###Deployment
 
 Simply copy all the files to a filesystem-based app server.
 
-Security
+###Security
 
-Required Permissions
+####Required Permissions
 
 All the modules are “xdmp:invoke”d from the app server, so the user will need that permission to run anything. 
 
 In addition, admin-module-read is necessary for the Navigator module to list all the databases.
 
-Server-side Protection
+####Server-side Protection
 
 There is an xquery library with permissions functions under Server/Security/permissions-lib.xqy.
 Every entry point should call perms:can-access-db($db) before invoking its own library module.  Additional checks can also be added to the same permissions-lib library and called as needed.
 
-Client-side Protection
+####Client-side Protection
 
 You can create custom permissions for the Navigator that can then be used to modify the user’s view.  Call Server/Security/permissions.xqy to retrieve the current user’s custom permissions.  This must be extended every time a new permission is added.
 
 
 
-Supported Browsers, Dev Tools & Debugging Tips
+###Supported Browsers, Dev Tools & Debugging Tips
 
 The Navigator has only been tested on Chrome.  Non-HTML5 compliant browsers should not be expected to work.
 
@@ -69,7 +68,7 @@ The Navigator currently does not show failure messages.  Chrome’s F12 Network 
 
 DHC chrome extension is helpful for debugging server scripts.
 
-What’s Missing
+###What’s Missing
 
 - Collection browsing
 - Paging in Navigator
