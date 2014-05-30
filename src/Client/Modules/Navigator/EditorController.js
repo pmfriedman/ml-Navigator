@@ -11,7 +11,7 @@ var Navigator;
 			$scope.$modal = $modal;
 			$scope.pathInDb = $routeParams.pathInDb || "";
 			$scope.pathInfo = new Navigator.PathInfo($scope.pathInDb);
-			$scope.canSave = CurrentUserPermissions.data.canSaveDocuments;
+			CurrentUserPermissions.getData().then(function (data) { $scope.canSave = data.canSaveDocuments;	});
 
 			$scope.documentContent = "";
 
