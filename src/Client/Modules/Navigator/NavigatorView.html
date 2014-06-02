@@ -39,8 +39,10 @@
                         </div>
                         <div class="modal-footer">
                         </div>
-                    </script>                    
-                    <a data-ng-if="pathInfo.pathType === 2" href="" data-ng-click="openModal(pathInfo)"><span class="glyphicon glyphicon-info-sign"></span></a>
+                    </script>
+                    <span class="" data-ng-if="pathInfo.pathType === 2" href="" data-ng-click="openModal(pathInfo)">
+                        <span class="badge btn btn-info">{{pathInfo.collections.length}}</span>
+                    </span>
                     &nbsp&nbsp
                     <a data-ng-href="#{{urlPrefix + pathInfo.path}}"><span>{{pathInfo.lastPartDisplay}}</span></a>
                 </div>
