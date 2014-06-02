@@ -31,7 +31,9 @@
     </nav>
 
 
-
+    <div ng-controller="AlertsController">
+        <alert class="alert alert-danger" data-ng-show="ErrorIndicator.show" close="closeAlert()">An Error Has Occurred.</alert>
+    </div>
 
     <div class="container">
         <div ng-view></div>
