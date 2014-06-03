@@ -2,7 +2,7 @@
 <html class="full-height" data-ng-app="app">
 <head>
     <title>ML Navigator</title>
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="lib/bootstrap/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="lib/codeMirror/codemirror.css" >
     <link rel="stylesheet" type="text/css" href="lib/codeMirror/the-matrix.css" >
     <link rel="stylesheet" type="text/css" href="css/styles.css">
@@ -31,18 +31,20 @@
     </nav>
 
 
-
+    <div ng-controller="AlertsController">
+        <alert class="alert alert-danger" data-ng-show="ErrorIndicator.show" close="closeAlert()">An Error Has Occurred.</alert>
+    </div>
 
     <div class="container">
         <div ng-view></div>
     </div>
 
-    <script type="text/javascript" src="https://code.jquery.com/jquery-2.0.3.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular-route.js"></script>
+    <script type="text/javascript" src="lib/jquery/jquery-2.0.3.min.js"></script>
+    <script src="lib/angular/angular.js"></script>
+    <script src="lib/angular/angular-route.js"></script>
     <script type="text/javascript" src="lib/vkbeautify/vkbeautify.0.99.00.beta.js"></script>
     <script src="lib/codeMirror/codemirror-compressed.js"></script>
-    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+    <script src="lib/bootstrap/bootstrap.min.js"></script>
     <script src="lib/angular-codemirror/ui-codemirror.min.js"></script>
     <script src="lib/angular-ui-ng-grid/ng-grid-2.0.9.min.js"></script>
     <script src="lib/angular-ui-bootstrap/ui-bootstrap-tpls-0.10.0.js"></script>

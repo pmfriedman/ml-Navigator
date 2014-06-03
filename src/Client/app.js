@@ -43,7 +43,32 @@ app.factory('RootPath', [function(){
 		// Customize as necessary
 		return '/';		
 	};
-}])
+}]);
+
+app.value('ErrorIndicator', { hasErrorOccurred: false });
+
+app.controller('AlertsController', ['$scope', 'ErrorIndicator', function($scope, ErrorIndicator){
+	$scope.ErrorIndicator = ErrorIndicator;
+	$scope.closeAlert = function() {
+		$scope.ErrorIndicator.show = false;
+	}
+}]);
+
+// intercept all http responses to display error message
+app.config(['$httpProvider', function($httpProvider) {
+	$httpProvider.responseInterceptors.push(function($timeout, $q, $log, ErrorIndicator) {
+		return function(promise) {
+			return promise.then(function(successResponse) {
+				return successResponse;
+
+			},
+			function(errorResponse) {
+				ErrorIndicator.show = true;
+				return errorResponse;
+			});
+		}
+	});	
+}]);
 
 app.run(function(editableOptions) {
 	editableOptions.theme = 'bs3';
